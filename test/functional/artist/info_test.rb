@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+require File.dirname(__FILE__) + '/../test_helper.rb'
 
 describe "Artist info for Metallica" do
   
@@ -38,8 +38,10 @@ describe "Artist info for Metallica" do
   
   it "should have images" do
     @info["image"].should be_kind_of Array
-    @info["image"][0].should be_kind_of String
-    #@info["image"][0].should == 'http://userserve-ak.last.fm/serve/34/9527793.jpg'
+    @info["image"][0].should be_kind_of Hash
+    @info["image"][0]['size'].should be_kind_of String
+    @info["image"][0]['#text'].should be_kind_of String
+    #@info["image"][0]['#text'].should == 'http://userserve-ak.last.fm/serve/34/9527793.jpg'
   end
   
   it "should have bio" do
@@ -49,5 +51,3 @@ describe "Artist info for Metallica" do
   end
   
 end
-
-
