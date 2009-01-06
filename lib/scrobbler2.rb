@@ -8,6 +8,7 @@ module Scrobbler2
 end
 
 require 'scrobbler2/base.rb'
+require 'scrobbler2/authorized_base.rb'
 require 'scrobbler2/artist.rb'
 
 

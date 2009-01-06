@@ -8,7 +8,6 @@ module Scrobbler2
       query = query.merge({:api_key => api_key, :method => method, :format => 'json'})
       options = options.merge({:query => query})
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
-
     end
   end
 end
