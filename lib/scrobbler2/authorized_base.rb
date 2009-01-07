@@ -16,7 +16,7 @@ module Scrobbler2
    
     def self.token
       return @token if @token
-      @token = get("auth.getToken")["token"]
+      @token = get("auth.gettoken")["lfm"]["token"]
     end 
     
     def self.auth_url
@@ -24,17 +24,17 @@ module Scrobbler2
     end
     
     def self.session
-      @session = get("auth.getSession", {:token => token})
+      @@session = get("auth.getsession", {:token => token})["lfm"]["session"]
     end
     
     def self.session_key
-      return @session_key if @session_key
-      return @session['key'] if @session
+      return @@session_key if @@session_key
+      return @@session['key'] if @@session
     end
     
     def self.get(method, query={}, options={})
       #implements signed requests
-      query = query.merge({:api_key => api_key, :method => method, :format => 'json'})
+      query = query.merge({:api_key => api_key, :method => method})
       signature = sign(query)      
       query = query.merge({:api_sig => signature})
 
@@ -43,14 +43,21 @@ module Scrobbler2
 
       options = options.merge({:query => query})
 
+      puts "Options: " + options.inspect + "\n"
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
 
     end
     
     def self.sign(query)
+      signature = query_signature(query)
+      md5 = Digest::MD5.hexdigest(signature)
+    end
+    
+    def self.query_signature(query)
       signature = query.sort {|a,b| a[0].to_s <=> b[0].to_s }.map { |param| param.join('') }.join('')
       signature = "#{signature}#{api_secret}"
-      md5 = Digest::MD5.hexdigest(signature)
+      puts "Signature: #{signature}"
+      signature
     end
     
   end
