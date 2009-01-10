@@ -40,12 +40,9 @@ module Scrobbler2
 
       #query = query.merge({:sk => session_key}) if session_key
 
-
       options = options.merge({:query => query})
 
-      puts "Options: " + options.inspect + "\n"
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
-
     end
     
     def self.sign(query)

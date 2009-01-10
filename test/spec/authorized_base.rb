@@ -53,14 +53,7 @@ describe "AuthorizedBase" do
       Scrobbler2::AuthorizedBase.get('artist.getInfo', {})
     end
     
-    it "should set the format to json" do
-      HTTParty.should_receive(:get) do |url, options|
-        options[:query][:format].should == 'json'
-      end
-      Scrobbler2::AuthorizedBase.get('artist.getInfo', {})
-    end
-    
-     it "should set the api_key" do
+    it "should set the api_key" do
       HTTParty.should_receive(:get) do |url, options|
         options[:query][:api_key].should == 'api_key'
       end
