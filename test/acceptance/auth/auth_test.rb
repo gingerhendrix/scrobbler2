@@ -9,7 +9,7 @@ describe "Authorization" do
     token.should_not be_nil
     puts "Now go to #{auth.url} and authorise\n"
 
-    gets #Wait for button press    
+    gets #Wait for enter
     
     session = auth.session
     puts "Session: #{session.inspect} \n"

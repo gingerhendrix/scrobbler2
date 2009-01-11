@@ -30,11 +30,6 @@ module Scrobbler2
       end   
     end
     
-    def self.session_key
-      return @@session_key if @@session_key
-      return @@session['key'] if @@session
-    end
-
     #implements signed requests
     def self.get_with_auth(method, query={}, options={})
       query = query.merge({:api_key => api_key, :method => method})
