@@ -6,5 +6,5 @@ end
 
 desc "Run functional tests"
 Spec::Rake::SpecTask.new('test:acceptance') do |t|
-  t.spec_files = FileList['test/acceptance/**/*_test.rb']
+  t.spec_files = FileList['test/acceptance/**/*_test.rb'].exclude('test/acceptance/auth/auth_test.rb')
 end
