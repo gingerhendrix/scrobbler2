@@ -6,6 +6,10 @@ describe "Artist" do
     @artist.class.stub!(:get).and_return Hash.new
   end
   
+  it "should have a default query {:artist => 'Metallica'}" do
+    @artist.instance_variable_get(:@query).should == {:artist => 'Metallica'}  
+  end
+  
   it "info should call get with 'artist.getInfo' with query params :artist => @name" do
     @artist.class.should_receive(:get).with('artist.getinfo', {:artist => "Metallica"}, {}).and_return Hash.new
     @artist.info
