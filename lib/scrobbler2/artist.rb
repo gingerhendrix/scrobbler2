@@ -9,6 +9,7 @@ module Scrobbler2
     get_resource :info, :root => 'artist'
     get_resource :similar, :root => 'similarartists'
     get_resource :top_albums, :root => 'topalbums'
+    get_resource :events, :root => 'events'
     
   end
 end

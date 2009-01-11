@@ -25,5 +25,9 @@ describe "Artist" do
     @artist.top_albums
   end
   
+  it "events should call get with 'artist.getEvents' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.getevents', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.events
+  end
 
 end
