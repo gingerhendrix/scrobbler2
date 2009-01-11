@@ -20,10 +20,10 @@ module Scrobbler2
     #implements signed requests
     def self.get_with_auth(method, query={}, options={})
       query = query.merge({:api_key => api_key, :method => method})
+      query = query.merge({:sk => session_key}) if session_key
+
       signature = sign(query)      
       query = query.merge({:api_sig => signature})
-
-      #query = query.merge({:sk => session_key}) if session_key
 
       options = options.merge({:query => query})
 
