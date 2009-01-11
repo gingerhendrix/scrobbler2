@@ -33,7 +33,7 @@ describe "Artist info for Metallica" do
   it "should have similar artists" do
     @info["similar"].should be_kind_of Hash
     @info["similar"]["artist"].should be_kind_of Array
-    @info["similar"]["artist"][0]["name"].should == "Megadeth"
+    @info["similar"]["artist"][0]["name"].should be_kind_of String
   end
   
   it "should have images" do
