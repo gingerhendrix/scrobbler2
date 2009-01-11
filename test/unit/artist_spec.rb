@@ -34,4 +34,19 @@ describe "Artist" do
     @artist.class.should_receive(:get).with('artist.getshouts', {:artist => "Metallica"}, {}).and_return Hash.new
     @artist.shouts
   end
+  
+  it "top_fans should call get with 'artist.getTopFans' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.gettopfans', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.top_fans
+  end
+  
+  it "top_tags should call get with 'artist.getTopTags' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.gettoptags', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.top_tags
+  end
+  
+  it "top_tracks should call get with 'artist.getTopTrakcs' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.gettoptracks', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.top_tracks
+  end
 end
