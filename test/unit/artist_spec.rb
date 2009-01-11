@@ -30,4 +30,8 @@ describe "Artist" do
     @artist.events
   end
 
+  it "shouts should call get with 'artist.getShouts' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.getshouts', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.shouts
+  end
 end
