@@ -1,5 +1,8 @@
 require File.dirname(__FILE__) + "/spec_helper.rb"
 
+class TestBaseImplementation < Scrobbler2::Base
+end
+
 describe "Base" do
 
   before(:each) do
@@ -21,6 +24,45 @@ describe "Base" do
   it "should have attribute api secret" do
     Scrobbler2::Base.api_secret = "blah"
     Scrobbler2::Base.api_secret.should == "blah"
+  end
+  
+  describe "get_resource" do
+    
+    before(:each) do
+      TestBaseImplementation.module_eval("get_resource :test_info, :root => :test");
+      TestBaseImplementation.stub!(:get).and_return({})
+      @test = TestBaseImplementation.new
+    end
+    
+    it "should create a named method" do
+      @test.method(:test_info).should_not be_nil
+    end
+    
+    describe "the method" do
+      it "the method should call self.get" do
+        TestBaseImplementation.should_receive(:get)
+        @test.test_info
+      end
+    
+      it "the method should call get with resource name got from the class name and the method name" do
+        TestBaseImplementation.should_receive(:get).with("testbaseimplementation.gettestinfo", an_instance_of(Hash), an_instance_of(Hash))
+        @test.test_info
+      end
+      
+      it "the method should get with query options from @query" do
+        @test.instance_variable_set(:@query, {:name => "test"})
+        TestBaseImplementation.should_receive(:get).with("testbaseimplementation.gettestinfo", {:name => "test"}, an_instance_of(Hash))
+        @test.test_info
+      end
+      
+      it "the method should return the root element" do
+        TestBaseImplementation.should_receive(:get).and_return({:test=>:root_element});
+        @test.test_info.should == :root_element              
+      end
+      
+   end
+
+    
   end
   
   describe "sign" do

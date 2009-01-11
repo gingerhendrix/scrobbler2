@@ -11,5 +11,15 @@ describe "Artist" do
     @artist.info
   end
   
+  it "similar should call get with 'artist.getSimilar' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.getsimilar', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.similar
+  end
+  
+  it "top_albums should call get with 'artist.getTopAlbums' with query params :artist => @name" do
+    @artist.class.should_receive(:get).with('artist.gettopalbums', {:artist => "Metallica"}, {}).and_return Hash.new
+    @artist.top_albums
+  end
+  
 
 end

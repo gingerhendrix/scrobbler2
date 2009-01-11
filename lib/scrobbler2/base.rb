@@ -5,11 +5,29 @@ module Scrobbler2
     cattr_accessor :api_key
     cattr_accessor :api_secret
     cattr_accessor :session_key
-          
+    
     def self.get(method, query={}, options={})
       query = query.merge({:api_key => api_key, :method => method, :format => 'json'})
       options = options.merge({:query => query})
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
+    end
+    
+    def self.get_resource(name, options = {})
+      define_method name do |*args|
+        query = args[1] || {}
+        local_options = args[0] || {}
+        local_value = instance_variable_get("@#{name.to_s}")
+        return local_value if local_value && !options[:force]
+
+        query = query.merge(@query) if @query
+        
+        method_name = self.class.name.split("::").last.downcase + ".get#{name.to_s.tr('_', '').downcase}" 
+        
+        value = self.class.get(method_name, query, local_options)
+        value = value[options[:root]] if options[:root]
+        
+        instance_variable_set("@#{name}", value)
+      end   
     end
     
     def self.session_key
