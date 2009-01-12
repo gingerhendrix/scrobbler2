@@ -9,6 +9,7 @@ end
 
 require 'scrobbler2/base.rb'
 require 'scrobbler2/auth.rb'
+require 'scrobbler2/album.rb'
 require 'scrobbler2/artist.rb'
 require 'scrobbler2/user.rb'
 
