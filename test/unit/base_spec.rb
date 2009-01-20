@@ -44,25 +44,36 @@ describe "Base" do
         @test.test_info
       end
     
-      it "the method should call get with resource name got from the class name and the method name" do
+      it "should call get with resource name got from the class name and the method name" do
         TestBaseImplementation.should_receive(:get).with("testbaseimplementation.gettestinfo", an_instance_of(Hash), an_instance_of(Hash))
         @test.test_info
       end
       
-      it "the method should get with query options from @query" do
+      it "should get with query options from @query" do
         @test.instance_variable_set(:@query, {:name => "test"})
         TestBaseImplementation.should_receive(:get).with("testbaseimplementation.gettestinfo", {:name => "test"}, an_instance_of(Hash))
         @test.test_info
       end
       
-      it "the method should return the root element" do
+      it "should return the root element" do
         TestBaseImplementation.should_receive(:get).and_return({:test=>:root_element});
         @test.test_info.should == :root_element              
       end
-      
    end
-
     
+  end
+  
+  describe "get_resource with options = {:resource_name => resource.method}" do
+    before(:each) do
+      TestBaseImplementation.module_eval("get_resource :test_info, :root => :test, :resource_name => 'resource.method'");
+      TestBaseImplementation.stub!(:get).and_return({})
+      @test = TestBaseImplementation.new
+    end
+  
+    it "should call get with resource name got from options" do
+      TestBaseImplementation.should_receive(:get).with("resource.method", an_instance_of(Hash), an_instance_of(Hash))
+      @test.test_info
+    end
   end
   
   describe "sign" do

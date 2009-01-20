@@ -21,7 +21,7 @@ module Scrobbler2
 
         query = query.merge(@query) if @query
         
-        method_name = self.class.name.split("::").last.downcase + ".get#{name.to_s.tr('_', '').downcase}" 
+        method_name = options[:resource_name] || self.class.name.split("::").last.downcase + ".get#{name.to_s.tr('_', '').downcase}" 
         
         value = self.class.get(method_name, query, local_options)
         value = value[options[:root]] if options[:root]
