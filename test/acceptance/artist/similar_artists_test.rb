@@ -8,8 +8,12 @@ describe "Similar artists for Metallica" do
     puts "Similar: #{@similar.inspect} \n"
   end 
 
-  it "should be an array of artists" do
-    pending "Last.fm service currently borken for similar artists - see http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=cher&api_key=b25b959554ed76058ac220b7b2e0a026&format=json"
+  it "should be a Hash" do
+    @similar.should be_kind_of Hash
+  end
+  
+  it "should have an array of tags" do
+    pending "XML parses currently broken for similar artists"
   end
   
 end
