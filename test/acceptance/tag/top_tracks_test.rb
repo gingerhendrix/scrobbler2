@@ -24,30 +24,9 @@ describe "Tracks for tag 'Disco'" do
     before(:each) do
       @track = @tracks['track'][0]
     end
-        
-    it "should have artist" do
-      @track.should have_key 'artist'
-      @track['artist'].should be_kind_of(Hash)
-      @track['artist'].should have_key('mbid')
-      @track['artist'].should have_key('name')
-      @track['artist'].should have_key('url')            
-    end
     
-    it "should have name" do
-      @track.should have_key 'name'
-    end
-    
-    it "should have mbid" do
-      @track.should have_key 'mbid'
-    end
-    
-    it "should have tagcount" do
-      @track.should have_key 'tagcount'
-    end
-
-    it "should have url" do
-      @track.should have_key 'url'
-    end
+    it_should_behave_like "Track"
+    it { @track.should have_key 'tagcount' }
   
   end
   

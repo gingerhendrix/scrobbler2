@@ -1,15 +1,13 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-describe "Top Artists for tag 'Disco '" do
+describe "Top Artists for tag 'Disco'" do
   
   before(:all) do #We only want to hit the webservice once.
     @tag = Scrobbler2::Tag.new "Disco"
     @artists = @tag.top_artists
   end 
   
-  it "should be hash" do
-    @artists.should be_kind_of Hash
-  end
+  it { @artists.should be_kind_of Hash }
   
   it "should have tag 'Disco'" do
     @artists["tag"].should == "Disco"
@@ -25,21 +23,8 @@ describe "Top Artists for tag 'Disco '" do
       @artist = @artists['artist'][0]
     end
     
-    it "should have name" do
-      @artist.should have_key 'name'
-    end
-    
-    it "should have mbid" do
-      @artist.should have_key 'mbid'
-    end
-    
-    it "should have tagcount" do
-      @artist.should have_key 'tagcount'
-    end
-
-    it "should have url" do
-      @artist.should have_key 'url'
-    end
+    it_should_behave_like "Artist"
+    it { @artist.should have_key 'tagcount' }
   
   end
   
