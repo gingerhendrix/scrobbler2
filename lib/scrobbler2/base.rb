@@ -9,6 +9,7 @@ module Scrobbler2
     def self.get(method, query={}, options={})
       query = query.merge({:api_key => api_key, :method => method, :format => 'json'})
       options = options.merge({:query => query})
+
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
     end
     
@@ -34,12 +35,12 @@ module Scrobbler2
     def self.get_with_auth(method, query={}, options={})
       query = query.merge({:api_key => api_key, :method => method})
       query = query.merge({:sk => session_key}) if session_key
-
+      
       signature = sign(query)      
       query = query.merge({:api_sig => signature})
 
       options = options.merge({:query => query})
-
+      puts "GET #{options.inspect} \n";
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
     end
     

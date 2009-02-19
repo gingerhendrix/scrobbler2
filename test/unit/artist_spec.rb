@@ -49,4 +49,9 @@ describe "Artist" do
     @artist.class.should_receive(:get).with('artist.gettoptracks', {:artist => "Metallica"}, {}).and_return Hash.new
     @artist.top_tracks
   end
+  
+  it "tags should call get_with_auth with 'artist.getTags', and query params :artist => @name" do
+    @artist.class.should_receive(:get_with_auth).with('artist.gettags', {:artist => "Metallica"}).and_return Hash.new :tags => []
+    @artist.tags
+  end
 end

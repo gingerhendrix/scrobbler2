@@ -17,7 +17,7 @@ module Scrobbler2
     
     def tags
       return @tags if @tags
-      @tags = self.class.get_with_auth("artist.gettags")["lfm"]["tags"]    
+      @tags = self.class.get_with_auth("artist.gettags", @query)["lfm"]["tags"]    
     end
 
     

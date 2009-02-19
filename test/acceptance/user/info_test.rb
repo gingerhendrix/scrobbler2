@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 describe "User info for gingerhendrix" do
   
   before(:all) do #We only want to hit the webservice once.
-    Scrobbler2::Base.session_key = "d22c32a016d60adf5ea0b1d8a08e305f";
     @user = Scrobbler2::User.new "gingerhendrix"
     @info = @user.info
     puts @info.inspect + "\n"

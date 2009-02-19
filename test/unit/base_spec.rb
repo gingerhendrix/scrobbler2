@@ -99,7 +99,7 @@ describe "Base" do
   end
 
   
-  describe "auth_get" do
+  describe "get_with_auth" do
     it "should call HTTParty.get" do
       HTTParty.should_receive(:get).with('http://ws.audioscrobbler.com/2.0/', an_instance_of(Hash))
       Scrobbler2::Base.get_with_auth('artist.getInfo', {})
@@ -126,6 +126,23 @@ describe "Base" do
       end
       Scrobbler2::Base.get_with_auth('artist.getInfo', {})
     end
+    
+    it "should set the session_key, if available" do
+      Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return("SESSIONKEY");      
+      HTTParty.should_receive(:get) do |url, options|
+        options[:query][:sk].should == 'SESSIONKEY'
+      end
+      Scrobbler2::Base.get_with_auth('artist.getInfo', {})
+    end
+    
+    it "should not set the session_key, if unavailable" do
+      Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return(nil);      
+      HTTParty.should_receive(:get) do |url, options|
+        options[:query].should_not have_key(:sk)
+      end
+      Scrobbler2::Base.get_with_auth('artist.getInfo', {})
+    end
+
   
   end
 
