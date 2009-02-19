@@ -33,15 +33,27 @@ module Scrobbler2
     
     #implements signed requests
     def self.get_with_auth(method, query={}, options={})
+      http_with_auth(:get, method, query, options)
+    end
+    
+    def self.http_with_auth(http_method, method, query={}, options={})
       query = query.merge({:api_key => api_key, :method => method})
       query = query.merge({:sk => session_key}) if session_key
       
       signature = sign(query)      
       query = query.merge({:api_sig => signature})
 
-      options = options.merge({:query => query})
-      puts "GET #{options.inspect} \n";
-      response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
+      if(http_method == :get)
+        options = options.merge({:query => query})
+      else
+        options = options.merge({:body => query})
+      end
+      puts "#{http_method}: #{options.inspect} \n";
+      response = HTTParty.send(http_method, 'http://ws.audioscrobbler.com/2.0/', options)
+    end
+    
+    def self.post_with_auth(method, query={}, options={})
+      http_with_auth(:post, method, query, options)      
     end
     
     def self.sign(query)

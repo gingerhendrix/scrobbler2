@@ -54,4 +54,9 @@ describe "Artist" do
     @artist.class.should_receive(:get_with_auth).with('artist.gettags', {:artist => "Metallica"}).and_return Hash.new :tags => []
     @artist.tags
   end
+  
+  it "add tags should post_with_auth with 'artist.addTags', and query params :artist => @name, :tags => 'test1, test2'" do
+    @artist.class.should_receive(:post_with_auth).with('artist.addtags', {:artist => "Metallica", :tags => "test1,test2"}).and_return Hash.new
+    @artist.add_tags ["test1", "test2"]
+  end
 end

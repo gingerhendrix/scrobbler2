@@ -99,49 +99,82 @@ describe "Base" do
   end
 
   
+  describe "auth_request", :shared => true do
+  
+    it "should set the query method" do
+      HTTParty.should_receive(http_method) do |url, options|
+        options[:query][:method].should == 'artist.getInfo'
+      end
+      action
+    end
+    
+    it "should set the api_key" do
+      HTTParty.should_receive(http_method) do |url, options|
+        options[:query][:api_key].should == 'api_key'
+      end
+      action
+    end
+    
+    it "should set the api_sginature" do
+      Scrobbler2::Base.should_receive(:sign).with(an_instance_of(Hash)).and_return('signature')
+      HTTParty.should_receive(http_method) do |url, options|
+        options[:query][:api_sig].should == 'signature'
+      end
+      action
+    end
+    
+    it "should set the session_key, if available" do
+      Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return("SESSIONKEY");      
+      HTTParty.should_receive(http_method) do |url, options|
+        options[:query][:sk].should == 'SESSIONKEY'
+      end
+      action
+    end
+    
+    it "should not set the session_key, if unavailable" do
+      Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return(nil);      
+      HTTParty.should_receive(http_method) do |url, options|
+        options[:query].should_not have_key(:sk)
+      end
+      action
+    end
+  
+  end
+  
+  
   describe "get_with_auth" do
     it "should call HTTParty.get" do
       HTTParty.should_receive(:get).with('http://ws.audioscrobbler.com/2.0/', an_instance_of(Hash))
       Scrobbler2::Base.get_with_auth('artist.getInfo', {})
     end
     
-    it "should set the query method" do
-      HTTParty.should_receive(:get) do |url, options|
-        options[:query][:method].should == 'artist.getInfo'
-      end
+    def action
       Scrobbler2::Base.get_with_auth('artist.getInfo', {})
     end
     
-    it "should set the api_key" do
-      HTTParty.should_receive(:get) do |url, options|
-        options[:query][:api_key].should == 'api_key'
-      end
-      Scrobbler2::Base.get_with_auth('artist.getInfo', {})
+    def http_method
+      :get
+    end 
+    
+    it_should_behave_like "auth_request"
+  end
+  
+  
+  describe "post_with_auth" do
+    it "should call HTTParty.post" do
+      HTTParty.should_receive(:post).with('http://ws.audioscrobbler.com/2.0/', an_instance_of(Hash))
+      Scrobbler2::Base.post_with_auth('artist.getInfo', {})
+    end
+
+    def action
+      Scrobbler2::Base.post_with_auth('artist.getInfo', {})
     end
     
-    it "should set the api_sginature" do
-      Scrobbler2::Base.should_receive(:sign).with(an_instance_of(Hash)).and_return('signature')
-      HTTParty.should_receive(:get) do |url, options|
-        options[:query][:api_sig].should == 'signature'
-      end
-      Scrobbler2::Base.get_with_auth('artist.getInfo', {})
-    end
+    def http_method
+      :post
+    end 
     
-    it "should set the session_key, if available" do
-      Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return("SESSIONKEY");      
-      HTTParty.should_receive(:get) do |url, options|
-        options[:query][:sk].should == 'SESSIONKEY'
-      end
-      Scrobbler2::Base.get_with_auth('artist.getInfo', {})
-    end
-    
-    it "should not set the session_key, if unavailable" do
-      Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return(nil);      
-      HTTParty.should_receive(:get) do |url, options|
-        options[:query].should_not have_key(:sk)
-      end
-      Scrobbler2::Base.get_with_auth('artist.getInfo', {})
-    end
+    it_should_behave_like "auth_request"
 
   
   end

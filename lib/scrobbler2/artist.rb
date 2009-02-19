@@ -20,6 +20,10 @@ module Scrobbler2
       @tags = self.class.get_with_auth("artist.gettags", @query)["lfm"]["tags"]    
     end
 
+    def add_tags(tags)
+      query = @query.merge :tags => tags.join(",")
+      self.class.post_with_auth("artist.addtags", query)
+    end
     
   end
 end
