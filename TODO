@@ -5,5 +5,31 @@
     User's tags for Metallica should have an array of tags +done
   Pull down Jeweler branch +done
   Finish API
-  Add README etc.
+    Get Requests
+      Track.get*
+        Track.getInfo +done
+          Acceptance Test +done
+          Unit Test +done
+          Implementation +done
+        Track.getSimilar
+          Acceptance Test
+          Unit Test
+          Implementation
+        Track.getTags
+        Track.getTopFans
+        Track.getTopTags
+      User.get*
+      Venue.get*
+      Geo.get*
+    Post Requests
+      {artist|album|track}.{add|remove}Tag
+      {artist|track|event}.share
+      track.{love|ban}
+      library.add{Artist|Album|Track}
+      playlist.{create|addTrack}
+      event.attend
+    Search Requests
+      {album|artist|tag|track|venue}.search
+  Add README
+  Simple website
   Release

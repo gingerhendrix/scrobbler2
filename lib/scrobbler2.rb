@@ -16,6 +16,7 @@ require 'scrobbler2/group.rb'
 require 'scrobbler2/library.rb'
 require 'scrobbler2/playlist.rb'
 require 'scrobbler2/tag.rb'
+require 'scrobbler2/track.rb'
 require 'scrobbler2/user.rb'
 
 
