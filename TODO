@@ -1,6 +1,8 @@
 0.1.0 Release
   Fix failing unit tests +done
   Fix failing acceptance tests
+    Artist info for Metallica should have bio +done
+    User's tags for Metallica should have an array of tags
   Pull down Jeweler branch
   Finish API
   Add README etc.

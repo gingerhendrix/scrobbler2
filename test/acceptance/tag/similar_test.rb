@@ -5,7 +5,7 @@ describe "Similar tags for Disco" do
   before(:all) do #We only want to hit the webservice once.
     @tag = Scrobbler2::Tag.new "Disco"
     @similar = @tag.similar
-    puts "Similar: \n\n #{@similar.inspect} \n\n"
+    #puts "Similar: \n\n #{@similar.inspect} \n\n"
   end 
 
   it "should be an array of artists" do

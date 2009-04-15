@@ -47,7 +47,7 @@ describe "Artist info for Metallica" do
   it "should have bio" do
     @info["bio"].should be_kind_of Hash
     @info["bio"]["summary"].match('metal band').should_not be_nil
-    @info["bio"]["content"].match('Master Of Puppets').should_not be_nil
+    @info["bio"]["content"].match('James Hetfield,').should_not be_nil
   end
   
 end

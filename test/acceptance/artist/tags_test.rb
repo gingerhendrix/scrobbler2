@@ -5,7 +5,7 @@ describe "User's tags for Metallica" do
   before(:all) do #We only want to hit the webservice once.
     @artist = Scrobbler2::Artist.new "Metallica"
     @tags = @artist.tags
-    puts "TAGS: #{@tags.inspect} \n"
+#    puts "TAGS: #{@tags.inspect} \n"
   end 
   
   it "should be a Hash" do
