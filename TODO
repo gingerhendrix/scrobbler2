@@ -1,0 +1,7 @@
+0.1.0 Release
+  Fix failing unit tests +done
+  Fix failing acceptance tests
+  Pull down Jeweler branch
+  Finish API
+  Add README etc.
+  Release

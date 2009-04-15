@@ -103,14 +103,14 @@ describe "Base" do
   
     it "should set the query method" do
       HTTParty.should_receive(http_method) do |url, options|
-        options[:query][:method].should == 'artist.getInfo'
+        options[options_param][:method].should == 'artist.getInfo'
       end
       action
     end
     
     it "should set the api_key" do
       HTTParty.should_receive(http_method) do |url, options|
-        options[:query][:api_key].should == 'api_key'
+        options[options_param][:api_key].should == 'api_key'
       end
       action
     end
@@ -118,7 +118,7 @@ describe "Base" do
     it "should set the api_sginature" do
       Scrobbler2::Base.should_receive(:sign).with(an_instance_of(Hash)).and_return('signature')
       HTTParty.should_receive(http_method) do |url, options|
-        options[:query][:api_sig].should == 'signature'
+        options[options_param][:api_sig].should == 'signature'
       end
       action
     end
@@ -126,7 +126,7 @@ describe "Base" do
     it "should set the session_key, if available" do
       Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return("SESSIONKEY");      
       HTTParty.should_receive(http_method) do |url, options|
-        options[:query][:sk].should == 'SESSIONKEY'
+        options[options_param][:sk].should == 'SESSIONKEY'
       end
       action
     end
@@ -134,7 +134,7 @@ describe "Base" do
     it "should not set the session_key, if unavailable" do
       Scrobbler2::Base.should_receive(:session_key).at_least(1).and_return(nil);      
       HTTParty.should_receive(http_method) do |url, options|
-        options[:query].should_not have_key(:sk)
+        options[options_param].should_not have_key(:sk)
       end
       action
     end
@@ -156,6 +156,10 @@ describe "Base" do
       :get
     end 
     
+    def options_param
+      :query
+    end
+    
     it_should_behave_like "auth_request"
   end
   
@@ -173,6 +177,11 @@ describe "Base" do
     def http_method
       :post
     end 
+    
+    def options_param
+      :body
+    end
+
     
     it_should_behave_like "auth_request"
 

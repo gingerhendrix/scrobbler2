@@ -48,7 +48,6 @@ module Scrobbler2
       else
         options = options.merge({:body => query})
       end
-      puts "#{http_method}: #{options.inspect} \n";
       response = HTTParty.send(http_method, 'http://ws.audioscrobbler.com/2.0/', options)
     end
     
