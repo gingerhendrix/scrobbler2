@@ -12,9 +12,9 @@
           Unit Test +done
           Implementation +done
         Track.getSimilar
-          Acceptance Test
-          Unit Test
-          Implementation
+          Acceptance Test +done
+          Unit Test +done
+          Implementation +done
         Track.getTags
         Track.getTopFans
         Track.getTopTags

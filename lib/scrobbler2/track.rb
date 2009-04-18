@@ -6,6 +6,7 @@ module Scrobbler2
     end
     
      get_resource :info, :root => 'track'
+     get_resource :similar, :root => 'similartracks'
    
   end
 end
