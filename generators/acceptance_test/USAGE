@@ -1,0 +1,9 @@
+Description:
+  Generate a scrobbler2 acceptance test
+  
+Usage:
+  ./script/generate acceptance_test resource func
+  
+  * resource is a last.fm api resource (eg. user, track etc)
+  * func is a last.fm api method (eg. info, similar, top_tags etc)
+

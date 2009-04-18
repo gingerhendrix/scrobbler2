@@ -1,6 +1,6 @@
 class AcceptanceTestGenerator < RubiGen::Base
 
-  default_options :author => nil
+#  default_options :author => nil
 
   attr_reader :resource
   attr_reader :func

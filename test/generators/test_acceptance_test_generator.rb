@@ -42,6 +42,6 @@ class TestAcceptanceTestGenerator < Test::Unit::TestCase
   end
 
   def generator_path
-    "scrobbler2_generators"
+    "generators"
   end
 end
