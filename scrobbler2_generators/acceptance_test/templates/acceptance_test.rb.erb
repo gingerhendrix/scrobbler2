@@ -1,0 +1,14 @@
+require File.dirname(__FILE__) + '/../test_helper.rb'
+
+describe "<%=func%> for <%=resource%> ..." do
+  
+  before(:all) do #We only want to hit the webservice once.
+    @<%=resource%> = Scrobbler2::<%=resource%>.new "..."
+    @<%=func%> = @<%=resource%>.<%=func%>
+  end 
+  
+  it "should be hash" do
+    @<%=func%>.should be_kind_of Hash
+  end
+  
+end
