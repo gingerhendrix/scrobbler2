@@ -7,6 +7,7 @@ module Scrobbler2
     
      get_resource :info, :root => 'track'
      get_resource :similar, :root => 'similartracks'
-   
+     get_resource :top_fans, :root => 'topfans'
+     
   end
 end

@@ -19,5 +19,10 @@ describe "Track" do
     @track.class.should_receive(:get).with('track.getsimilar', {:artist => "Metallica", :track => "Blackened"}, {}).and_return Hash.new
     @track.similar
   end
+  
+ it "top_fans should call get with 'track.getTopFans' with query params :artist => @artist, :track => @album" do
+    @track.class.should_receive(:get).with('track.gettopfans', {:artist => "Metallica", :track => "Blackened"}, {}).and_return Hash.new
+    @track.top_fans
+  end
 
 end
