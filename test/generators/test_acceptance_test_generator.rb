@@ -9,7 +9,6 @@ class TestAcceptanceTestGenerator < Test::Unit::TestCase
   end
 
   def teardown
-    p app_root_files
     bare_teardown
   end
 

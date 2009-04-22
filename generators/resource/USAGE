@@ -1,0 +1,8 @@
+Description:
+    Generate a scrobbler2 resource
+  
+Usage:
+  ./script/generate resource resource [funcs]
+  
+  * resource is a last.fm api resource (eg. user, track etc)
+  * funcs are a list of last.fm get api method (eg. info, similar, top_tags etc)

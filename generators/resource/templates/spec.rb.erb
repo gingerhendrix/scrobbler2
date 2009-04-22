@@ -1,0 +1,22 @@
+require File.dirname(__FILE__) + "/spec_helper.rb"
+
+describe "<%=name.classify%>" do
+  before(:each) do
+    @<%=name%> = Scrobbler2::<%=name.classify%>.new "..."
+    @<%=name%>.class.stub!(:get).and_return Hash.new
+  end
+  
+  it "should have a default query {TODO}" do
+    @<%=name%>.instance_variable_get(:@query).should == {}  
+  end
+  
+  <% funcs.each do |func| %>
+  
+  it "<%=func%> should call get with '<%=name%>.get<%=func%>'" do
+    @<%=name%>.class.should_receive(:get).with('<%=name%>.get<%=func%>', anything(), anything()).and_return Hash.new
+    @<%=name%>.<%=func%>
+  end
+  
+  <% end %>
+
+end
