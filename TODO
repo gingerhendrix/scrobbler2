@@ -17,7 +17,7 @@
           Implementation +done
         Track.getTopFans +done
         Track.getTopTags +done
-      User.get*
+      User.get* +done
       Venue.get*
       Geo.get*
     Post Requests

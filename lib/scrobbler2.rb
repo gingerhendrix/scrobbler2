@@ -18,5 +18,5 @@ require 'scrobbler2/playlist.rb'
 require 'scrobbler2/tag.rb'
 require 'scrobbler2/track.rb'
 require 'scrobbler2/user.rb'
-
+require 'scrobbler2/venue.rb'
 
