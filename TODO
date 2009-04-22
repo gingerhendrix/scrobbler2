@@ -18,9 +18,10 @@
         Track.getTopFans +done
         Track.getTopTags +done
       User.get* +done
-      Venue.get*
-      Geo.get*
-    Post Requests
+      Venue.get* +done
+      Geo.get* +done
+    Post and Auth Requests
+      user.{getInfo|getRemommendedArtists|getRecommendedEvents}
       {artist|album|track}.{get|add|remove}Tag
       {artist|track|event}.share
       track.{love|ban}
