@@ -6,17 +6,17 @@
   Pull down Jeweler branch +done
   Finish API
     Get Requests
-      Track.get*
+      Track.get* +done
         Track.getInfo +done
           Acceptance Test +done
           Unit Test +done
           Implementation +done
-        Track.getSimilar
+        Track.getSimilar +done
           Acceptance Test +done
           Unit Test +done
           Implementation +done
-        Track.getTopFans
-        Track.getTopTags
+        Track.getTopFans +done
+        Track.getTopTags +done
       User.get*
       Venue.get*
       Geo.get*
