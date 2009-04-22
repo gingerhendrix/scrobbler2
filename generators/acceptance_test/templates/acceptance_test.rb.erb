@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 describe "<%=func%> for <%=resource%> ..." do
   
   before(:all) do #We only want to hit the webservice once.
-    @<%=resource%> = Scrobbler2::<%=resource%>.new "..."
+    @<%=resource%> = Scrobbler2::<%=resource.classify%>.new "..."
     @<%=func%> = @<%=resource%>.<%=func%>
   end 
   

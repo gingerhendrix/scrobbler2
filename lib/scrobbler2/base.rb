@@ -20,11 +20,15 @@ module Scrobbler2
         local_value = instance_variable_get("@#{name.to_s}")
         return local_value if local_value && !options[:force]
 
-        query = query.merge(@query) if @query
+        query = query.merge options[:query] if options[:query]
+        query = query.merge(@query) if @query && !options[:query]
         
         method_name = options[:resource_name] || self.class.name.split("::").last.downcase + ".get#{name.to_s.tr('_', '').downcase}" 
-        
-        value = self.class.get(method_name, query, local_options)
+        if options[:auth]
+          value = self.class.get_with_auth(method_name, query, local_options)
+        else
+          value = self.class.get(method_name, query, local_options)                
+        end
         value = value[options[:root]] if options[:root]
         
         instance_variable_set("@#{name}", value)

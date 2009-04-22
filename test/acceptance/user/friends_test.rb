@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-describe "friends for user ..." do
+describe "friends for user gingerhendrix" do
   
   before(:all) do #We only want to hit the webservice once.
-    @user = Scrobbler2::user.new "..."
+    @user = Scrobbler2::User.new "gingerhendrix"
     @friends = @user.friends
   end 
   
