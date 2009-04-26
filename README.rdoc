@@ -1,0 +1,86 @@
+= Scrobbler2
+
+Scrobbler2 is a wrapper for the Last.fm web services (http://www.last.fm/api), inspired by Jnunemaker's Original Scrobbler Gem (http://github.com/jnunemaker/scrobbler).
+
+== Requirements
+
+You MUST have an api_key provided to you by Last.fm for all queries. Certain operations also require an api_secret, which is provided to you at the same time as an api key. You must have a Last.fm user account, and you may then request an api_key at http://www.last.fm/api/account
+If you install via gem, Ruby Gems will automatically pull in the dependencies. Otherwise, Scrobbler2 requires HTTParty (http://github.com/jnunemaker/httparty) and ActiveSupport (http://rubyforge.org/projects/activesupport/) to be installed.
+
+= Usage
+
+Below is just a sampling of how easy this lib is to use.
+
+== Users
+
+	username = 'gingerhendrix'
+	user = Scrobbler2::User.new(username)
+	user.api_key = abcdefghijklmnopqrstuvwxyz123456
+	user.api_secret = 9876543210zyxwvutsrqponmlkjihgfe
+
+	puts "#{username}'s Recent Tracks"
+	puts "=" * (username.length + 16)
+	user.recent_tracks["track"].each { |t| puts t["name"] }
+
+	puts
+	puts
+
+	puts "#{username}'s Top Tracks"
+	puts "=" * (username.length + 13)
+	user.top_tracks["track"].each { |t| puts "(#{t["playcount"]}) #{t["name"]}" }
+	
+== Albums
+	
+	album = Scrobbler2::Album.new('Carrie Underwood', 'Some Hearts', :include_info => true)
+
+	puts "Album: #{album.info["name"]}"
+	puts "Artist: #{album.info["artist"]}"
+	puts "Listeners: #{album.info["listeners"]}"
+	puts "URL: #{album.info["url"]}"
+	puts "Release Date: #{album.info["releasedate"]}"
+
+	puts
+	puts
+
+	# Can't quite figure out the magic in this one...
+	#puts "Album Tags"
+	#longest_tag_name = album.info["toptags"]["tag"].collect(&:name).sort { |x, y| y.length <=> x.length }.first.length
+	#puts "=" * longest_tag_name
+	#album.info["toptags"]["tag"].each { |t| puts t["name"] }
+	
+== Artists
+	
+	artist = Scrobbler2::Artist.new('Carrie Underwood')
+
+	puts 'Top Tracks'
+	puts "=" * 10
+	artist.top_tracks["track"].each { |t| puts "(#{t["playcount"]} plays) #{t["name"]}" }
+
+	puts
+
+	puts 'Similar Artists'
+	puts "=" * 15
+	artist.info["similar"]["artist"].each { |a| puts "#{a["name"]}" }
+	
+== Tags	
+	
+	tag = Scrobbler2::Tag.new('country')
+
+	puts 'Top Albums'
+	tag.top_albums["album"].each { |a| puts "(#{a["tagcount"]} tags) '#{a["name"]}' by #{a["artist"]["name"]}" }
+
+	puts
+
+	puts 'Top Tracks'
+	tag.top_tracks.each { |t| puts "(#{t["tagcount"]} tags) '#{t["name"]}' by #{t["artist"]["name"]}" }
+	
+== Tracks
+	
+	track = Scrobbler2::Track.new('Carrie Underwood', 'Before He Cheats')
+	puts 'Fans'
+	puts "=" * 4
+	puts track.info["listeners"]
+	
+== TODO
+
+	Write requests, pretty much in full. Emphasis on Scrobble/Now Playing Submission

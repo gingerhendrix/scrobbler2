@@ -1,5 +1,0 @@
-Scrobbler2
-==========
-
-
-A ruby library for accessing the last.fm api v2.0.  Based on John Nunemaker's httParty gem and inspired by his scrobbler gem.
