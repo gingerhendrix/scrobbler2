@@ -32,7 +32,7 @@ Below is just a sampling of how easy this lib is to use.
 	
 == Albums
 	
-	album = Scrobbler2::Album.new('Carrie Underwood', 'Some Hearts', :include_info => true)
+	album = Scrobbler2::Album.new('Carrie Underwood', 'Some Hearts')
 
 	puts "Album: #{album.info["name"]}"
 	puts "Artist: #{album.info["artist"]}"
