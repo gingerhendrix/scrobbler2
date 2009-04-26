@@ -28,7 +28,7 @@ Below is just a sampling of how easy this lib is to use.
 
 	puts "#{username}'s Top Tracks"
 	puts "=" * (username.length + 13)
-	user.top_tracks["track"].each { |t| puts "(#{t["playcount"]}) #{t["name"]}" }
+	user.top_tracks["track"].each { |t| puts "(#{t["playcount"]} plays) #{t["name"]}" }
 	
 == Albums
 	
