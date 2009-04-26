@@ -42,11 +42,10 @@ Below is just a sampling of how easy this lib is to use.
 	puts
 	puts
 
-	# Can't quite figure out the magic in this one...
-	#puts "Album Tags"
-	#longest_tag_name = album.info["toptags"]["tag"].collect(&:name).sort { |x, y| y.length <=> x.length }.first.length
-	#puts "=" * longest_tag_name
-	#album.info["toptags"]["tag"].each { |t| puts t["name"] }
+	puts "Album Tags"
+	longest_tag_name = album.info["toptags"]["tag"].collect {|t| t["name"] }.sort {|x, y| y.length <=> x.length }.first.length
+	puts "=" * longest_tag_name
+	album.info["toptags"]["tag"].each { |t| puts t["name"] }
 	
 == Artists
 	
