@@ -1,25 +1,15 @@
+0.0.5 Release
+  Add README
+    Merge from vxjasonvx
+    Copy examples to /examples
+    Add a development section with info about rake tasks etc.
+  Look at api_key and secret_key
+  Simple website
+  Release
+0.0.6 Release
+  Fix auth (so user.getInfo works at least)
 0.1.0 Release
-  Fix failing unit tests +done
-  Fix failing acceptance tests +done
-    Artist info for Metallica should have bio +done
-    User's tags for Metallica should have an array of tags +done
-  Pull down Jeweler branch +done
   Finish API
-    Get Requests
-      Track.get* +done
-        Track.getInfo +done
-          Acceptance Test +done
-          Unit Test +done
-          Implementation +done
-        Track.getSimilar +done
-          Acceptance Test +done
-          Unit Test +done
-          Implementation +done
-        Track.getTopFans +done
-        Track.getTopTags +done
-      User.get* +done
-      Venue.get* +done
-      Geo.get* +done
     Post and Auth Requests
       user.{getInfo|getRemommendedArtists|getRecommendedEvents}
       {artist|album|track}.{get|add|remove}Tag
@@ -30,6 +20,4 @@
       event.attend
     Search Requests
       {album|artist|tag|track|venue}.search
-  Add README
-  Simple website
   Release
