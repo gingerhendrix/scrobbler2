@@ -15,10 +15,7 @@ module Scrobbler2
     get_resource :top_tags, :root => 'toptags'
     get_resource :top_tracks, :root => 'toptracks'
     
-    def tags
-      return @tags if @tags
-      @tags = self.class.get_with_auth("artist.gettags", @query)["lfm"]["tags"]    
-    end
+    get_resource :tags, :root=> "tags", :auth => true
 
     def add_tags(tags)
       query = @query.merge :tags => tags.join(",")

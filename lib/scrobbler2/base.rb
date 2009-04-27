@@ -37,7 +37,7 @@ module Scrobbler2
     
     #implements signed requests
     def self.get_with_auth(method, query={}, options={})
-      http_with_auth(:get, method, query, options)
+      http_with_auth(:get, method, query, options)["lfm"]
     end
     
     def self.http_with_auth(http_method, method, query={}, options={})

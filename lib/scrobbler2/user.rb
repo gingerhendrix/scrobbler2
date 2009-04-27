@@ -6,7 +6,7 @@ module Scrobbler2
     end
     
      get_resource :events, :root => "events"
-     get_resource :info, :root => "user", :auth=>true, :query => {}
+     get_resource :info, :root=>"user", :auth=>true, :query => {}
      get_resource :friends, :root => "friends"
      get_resource :loved_tracks, :root => "lovedtracks"
      get_resource :neighbours, :root => "neighbours"

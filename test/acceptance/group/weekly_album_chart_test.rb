@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-describe "Weekly album chart for group 'stubborn tiny lights'" do
+describe "Weekly album chart for group 'Metal Drummers'" do
   
   before(:all) do #We only want to hit the webservice once.
-    @group = Scrobbler2::Group.new "stubborn tiny lights"
+    @group = Scrobbler2::Group.new "Metal Drummers"
     @chart = @group.weekly_album_chart
   end 
   
@@ -11,8 +11,8 @@ describe "Weekly album chart for group 'stubborn tiny lights'" do
     @chart.should be_kind_of Hash
   end
   
-  it "should have group 'stubborn tiny lights'" do
-    @chart["group"].should == "stubborn tiny lights"
+  it "should have group 'Metal Drummers'" do
+    @chart["group"].should == "Metal Drummers"
   end
   
   it "should have from" do
