@@ -2,22 +2,62 @@
 
 Scrobbler2 is a wrapper for the Last.fm web services (http://www.last.fm/api), inspired by Jnunemaker's Original Scrobbler Gem (http://github.com/jnunemaker/scrobbler).
 
+== Installation
+
+Install via ruby-gems
+  sudo gem install gingerhendrix-scrobbler2 --source http://gems.github.com
+
 == Requirements
 
-You MUST have an api_key provided to you by Last.fm for all queries. Certain operations also require an api_secret, which is provided to you at the same time as an api key. You must have a Last.fm user account, and you may then request an api_key at http://www.last.fm/api/account
-
-If you install via gem, Ruby Gems will automatically pull in the dependencies. Otherwise, Scrobbler2 requires HTTParty (http://github.com/jnunemaker/httparty) and ActiveSupport (http://rubyforge.org/projects/activesupport/) to be installed.
+Scrobbler2 requires 
+* HTTParty (http://github.com/jnunemaker/httparty) 
+* ActiveSupport (http://rubyforge.org/projects/activesupport/).
 
 = Usage
 
-Below is just a sampling of how easy this lib is to use.
+== API Key
 
+All last.fm requests require an API Key. Register for an API key at http://www.last.fm/api
+
+  Scrobbler2::Base.api_key = "abcdefghijklmnopqrstuvwxyz123456"
+
+== Authentication
+
+Some requests (eg. write requests) require authentication.  Authenticated request require an api secret (provided with your api key) and a session key.  
+
+  Scrobbler2::Base.api_secret = "9876543210zyxwvutsrqponmlkjihgfe"
+  Scrobbler2::Base.session_key = "qwertyuioplkjhgfdsamnbvcxz"
+
+=== Obtaining a session key
+
+scrobbler2 currently supports last.fm's desktop authentication protocol.  In this process
+1. The app requests a authentication token
+2. The app sends the user to a last.fm authentication page
+3. The user agrees to allow the the app acess to their data.
+4. The app requests a session key. 
+5. The app makes an authenticated request with the session key.
+
+    auth = Scrobbler2::Auth.new
+    token = auth.token
+    puts "Auth Token #{token} \n" 
+    token.should_not be_nil
+    puts "Now go to #{auth.url} and authorise\n"
+
+    gets #Wait for enter
+    
+    session = auth.session
+    puts "Session: #{session.inspect} \n"
+    session.should be_kind_of(Hash)
+    session['key'].should_not be_nil  
+    
+    Scrobbler2::Base.session_key = session['key']
+  	user = Scrobbler2::User.new(username)
+  	user.info
+  
 == Users
 
 	username = 'gingerhendrix'
 	user = Scrobbler2::User.new(username)
-	user.api_key = abcdefghijklmnopqrstuvwxyz123456
-	user.api_secret = 9876543210zyxwvutsrqponmlkjihgfe
 
 	puts "#{username}'s Recent Tracks"
 	puts "=" * (username.length + 16)
@@ -80,7 +120,36 @@ Below is just a sampling of how easy this lib is to use.
 	puts 'Fans'
 	puts "=" * 4
 	puts track.info["listeners"]
-	
+
+= Development
+
+Scrobbler2 is still in development.  If you want to help out please feel free to fork the project on github (http://github.com/gingerhendrix/scrobbler2).
+
+== Build and install
+The scrobbler2 gem can be built and installed via rake.
+  
+  rake build    # builds the gem (in pkg/)
+  rake install  # builds and installs the gem (using sudo gem install)
+  
+== Tests
+
+Scrobbler2 has unit and acceptance tests written using RSpec.  The tests can be run using rake.
+
+  rake test:unit        # runs the unit tests
+  rake test:acceptance  # runs the acceptance tests
+
+The acceptance tests run against the live last.fm api.  You will need to set the api_key and authentication parameters in test/acceptance/test_helper.rb before 
+running these tests.  You can obtain a session key by running the auth_test, this test is not invoked with the rest of the acceptance suite.
+  
+  ruby test/acceptance/auth/auth_test.rb
+
+== Internals
+
+Scrobbler2 api methods use a simple set of macros to implement the api.  All the hard work goes on in Scrobbler2::Base.
+  
 == TODO
 
-	Write requests, pretty much in full. Emphasis on Scrobble/Now Playing Submission
+* Write requests.
+* Submissions
+* Radio API
+	  
