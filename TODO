@@ -1,6 +1,6 @@
 0.0.5 Release
   Add README
-    Merge from vxjasonvx
+    Merge from VxJasonxV
     Copy examples to /examples
     Add a development section with info about rake tasks etc.
   Look at api_key and secret_key
