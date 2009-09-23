@@ -1,10 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-describe "Top Tags for Metallica" do
+describe "Top Tags" do
   
   before(:all) do #We only want to hit the webservice once.
-    @tag = Scrobbler2::Tag.new "Disco"
-    @tags = @tag.top_tags
+    @tags = Scrobbler2::Tag.top_tags
   end 
    it "should return a Hash" do
     @tags.should be_kind_of(Hash)

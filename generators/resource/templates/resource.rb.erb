@@ -5,7 +5,7 @@ module Scrobbler2
       @query = {}#TODO eg. {:artist => artist, :track => track}
     end
     <% funcs.each do |func| %>
-     get_resource :<%=func%>, :root => "<%=func.camelize.downcase%>"
+     has_resource :<%=func%>, :root => "<%=func.camelize.downcase%>"
    <% end %>
   end
 end

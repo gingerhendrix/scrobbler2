@@ -26,10 +26,10 @@ describe "Base" do
     Scrobbler2::Base.api_secret.should == "blah"
   end
   
-  describe "get_resource" do
+  describe "has_resource" do
     
     before(:each) do
-      TestBaseImplementation.module_eval("get_resource :test_info, :root => :test");
+      TestBaseImplementation.module_eval("has_resource :test_info, :root => :test");
       TestBaseImplementation.stub!(:get).and_return({})
       @test = TestBaseImplementation.new
     end
@@ -63,9 +63,9 @@ describe "Base" do
     
   end
   
-  describe "get_resource with options = {:resource_name => resource.method}" do
+  describe "has_resource with options = {:resource_name => resource.method}" do
     before(:each) do
-      TestBaseImplementation.module_eval("get_resource :test_info, :root => :test, :resource_name => 'resource.method'");
+      TestBaseImplementation.module_eval("has_resource :test_info, :root => :test, :resource_name => 'resource.method'");
       TestBaseImplementation.stub!(:get).and_return({})
       @test = TestBaseImplementation.new
     end

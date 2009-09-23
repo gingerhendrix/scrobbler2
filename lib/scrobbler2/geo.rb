@@ -5,11 +5,11 @@ module Scrobbler2
       @query = {}#TODO eg. {:artist => artist, :track => track}
     end
     
-     get_resource :events, :root => "events"
+     has_resource :events, :root => "events"
    
-     get_resource :top_artists, :root => "topartists"
+     has_resource :top_artists, :root => "topartists"
    
-     get_resource :top_tracks, :root => "toptracks"
+     has_resource :top_tracks, :root => "toptracks"
    
   end
 end

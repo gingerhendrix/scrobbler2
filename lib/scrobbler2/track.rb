@@ -5,9 +5,9 @@ module Scrobbler2
       @query = {:artist => artist, :track => track}
     end
     
-     get_resource :info, :root => 'track'
-     get_resource :similar, :root => 'similartracks'
-     get_resource :top_fans, :root => 'topfans'
-     get_resource :top_tags, :root => 'toptags'
+     has_resource :info, :root => 'track'
+     has_resource :similar, :root => 'similartracks'
+     has_resource :top_fans, :root => 'topfans'
+     has_resource :top_tags, :root => 'toptags'
   end
 end

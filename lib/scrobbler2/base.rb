@@ -13,28 +13,55 @@ module Scrobbler2
       response = HTTParty.get('http://ws.audioscrobbler.com/2.0/', options)
     end
     
-    def self.get_resource(name, options = {})
+    def self.has_resource(name, options = {})
       define_method name do |*args|
         query = args[1] || {}
         local_options = args[0] || {}
         local_value = instance_variable_get("@#{name.to_s}")
         return local_value if local_value && !options[:force]
 
-        query = query.merge options[:query] if options[:query]
-        query = query.merge(@query) if @query && !options[:query]
-        
+        if options[:query]
+          query.merge!(options[:query])
+        elsif @query
+          query.merge!(@query)
+        end
+
         method_name = options[:resource_name] || self.class.name.split("::").last.downcase + ".get#{name.to_s.tr('_', '').downcase}" 
         if options[:auth]
           value = self.class.get_with_auth(method_name, query, local_options)
         else
-          value = self.class.get(method_name, query, local_options)                
+          value = self.class.get(method_name, query, local_options)
         end
         value = value[options[:root]] if options[:root]
         
         instance_variable_set("@#{name}", value)
-      end   
+      end
     end
-    
+
+    # TODO this needs to be DRYed up, wrt has_resource
+    def self.has_singleton_resource(name, options={})
+      (class << self; self; end).class_eval do
+        define_method(name) do |*args|
+          query = args[1] || {}
+          local_options = args[0] || {}
+          local_value = instance_variable_get("@#{name.to_s}")
+          return local_value if local_value && !options[:force]
+
+          query.merge!(options[:query]) if options[:query]
+
+          method_name = options[:resource_name] || self.name.split("::").last.downcase + ".get#{name.to_s.tr('_', '').downcase}"
+          if options[:auth]
+            value = self.get_with_auth(method_name, query, local_options)
+          else
+            value = self.get(method_name, query, local_options)
+          end
+          value = value[options[:root]] if options[:root]
+
+          instance_variable_set("@#{name}", value)
+        end
+      end
+    end
+
     #implements signed requests
     def self.get_with_auth(method, query={}, options={})
       http_with_auth(:get, method, query, options)["lfm"]

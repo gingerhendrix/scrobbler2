@@ -5,8 +5,8 @@ module Scrobbler2
       @query = {:venue => id}
     end
     
-     get_resource :events, :root => "events"
-     get_resource :past_events, :root => "events"
+     has_resource :events, :root => "events"
+     has_resource :past_events, :root => "events"
    
   end
 end

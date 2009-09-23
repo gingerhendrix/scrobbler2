@@ -32,8 +32,8 @@ class TestResourceGenerator < Test::Unit::TestCase
     run_generator('resource', funcs.unshift(resource), sources)
     assert_generated_file   "lib/scrobbler2/resource.rb" do |file|
       assert file.include?("class Resource < Base")
-      assert file.include?("get_resource :method1, :root => \"method1\"")
-      assert file.include?("get_resource :method2, :root => \"method2\"")
+      assert file.include?("has_resource :method1, :root => \"method1\"")
+      assert file.include?("has_resource :method2, :root => \"method2\"")
     end
     
     assert_generated_file   "test/unit/resource_spec.rb" do |file|

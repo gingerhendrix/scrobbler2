@@ -5,8 +5,8 @@ module Scrobbler2
       @query = {:user => user}
     end
     
-     get_resource :artists, :root => 'artists'
-     get_resource :albums, :root => 'albums'
-     get_resource :tracks, :root => 'tracks'
+     has_resource :artists, :root => 'artists'
+     has_resource :albums, :root => 'albums'
+     has_resource :tracks, :root => 'tracks'
   end
 end

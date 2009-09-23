@@ -5,8 +5,8 @@ module Scrobbler2
       @query = {:event => event_id}
     end
     
-     get_resource :info, :root => 'event'
-     get_resource :shouts, :root => 'shouts'
+     has_resource :info, :root => 'event'
+     has_resource :shouts, :root => 'shouts'
      
   end
 end

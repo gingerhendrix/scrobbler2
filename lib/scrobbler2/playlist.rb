@@ -5,6 +5,6 @@ module Scrobbler2
       @query = {:playlistURL => playlist_url}
     end
     
-     get_resource :fetch, :root => 'playlist', :resource_name => 'playlist.fetch'
+     has_resource :fetch, :root => 'playlist', :resource_name => 'playlist.fetch'
   end
 end
