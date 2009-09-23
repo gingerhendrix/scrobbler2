@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{A ruby library for accessing the last.fm v2 webservices}
   s.email = %q{gingerhendrix@gmail.com}
   s.extra_rdoc_files = [
-    "README"
+    "README.rdoc"
   ]
   s.files = [
     "Rakefile",
