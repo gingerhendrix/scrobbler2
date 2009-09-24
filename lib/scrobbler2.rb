@@ -1,6 +1,6 @@
 require 'rubygems'
+require 'activesupport'
 require 'httparty'
-require 'active_support'
 $: << File.dirname(__FILE__)
 
 module Scrobbler2
