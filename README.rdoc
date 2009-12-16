@@ -37,89 +37,89 @@ scrobbler2 currently supports last.fm's desktop authentication protocol.  In thi
 4. The app requests a session key. 
 5. The app makes an authenticated request with the session key.
 
-    auth = Scrobbler2::Auth.new
-    token = auth.token
-    puts "Auth Token #{token} \n" 
-    token.should_not be_nil
-    puts "Now go to #{auth.url} and authorise\n"
-
-    gets #Wait for enter
-    
-    session = auth.session
-    puts "Session: #{session.inspect} \n"
-    session.should be_kind_of(Hash)
-    session['key'].should_not be_nil  
-    
-    Scrobbler2::Base.session_key = session['key']
-  	user = Scrobbler2::User.new(username)
-  	user.info
+  auth = Scrobbler2::Auth.new
+  token = auth.token
+  puts "Auth Token #{token} \n" 
+  token.should_not be_nil
+  puts "Now go to #{auth.url} and authorise\n"
+  
+  gets #Wait for enter
+  
+  session = auth.session
+  puts "Session: #{session.inspect} \n"
+  session.should be_kind_of(Hash)
+  session['key'].should_not be_nil  
+  
+  Scrobbler2::Base.session_key = session['key']
+  user = Scrobbler2::User.new(username)
+  user.info
   
 == Users
 
-	username = 'gingerhendrix'
-	user = Scrobbler2::User.new(username)
-
-	puts "#{username}'s Recent Tracks"
-	puts "=" * (username.length + 16)
-	user.recent_tracks["track"].each { |t| puts t["name"] }
-
-	puts
-	puts
-
-	puts "#{username}'s Top Tracks"
-	puts "=" * (username.length + 13)
-	user.top_tracks["track"].each { |t| puts "(#{t["playcount"]} plays) #{t["name"]}" }
+  username = 'gingerhendrix'
+  user = Scrobbler2::User.new(username)
+  
+  puts "#{username}'s Recent Tracks"
+  puts "=" * (username.length + 16)
+  user.recent_tracks["track"].each { |t| puts t["name"] }
+  
+  puts
+  puts
+  
+  puts "#{username}'s Top Tracks"
+  puts "=" * (username.length + 13)
+  user.top_tracks["track"].each { |t| puts "(#{t["playcount"]} plays) #{t["name"]}" }
 	
 == Albums
 	
-	album = Scrobbler2::Album.new('Carrie Underwood', 'Some Hearts')
-
-	puts "Album: #{album.info["name"]}"
-	puts "Artist: #{album.info["artist"]}"
-	puts "Listeners: #{album.info["listeners"]}"
-	puts "URL: #{album.info["url"]}"
-	puts "Release Date: #{album.info["releasedate"]}"
-
-	puts
-	puts
-
-	puts "Album Tags"
-	longest_tag_name = album.info["toptags"]["tag"].collect {|t| t["name"] }.sort {|x, y| y.length <=> x.length }.first.length
-	puts "=" * longest_tag_name
-	album.info["toptags"]["tag"].each { |t| puts t["name"] }
+  album = Scrobbler2::Album.new('Carrie Underwood', 'Some Hearts')
+  
+  puts "Album: #{album.info["name"]}"
+  puts "Artist: #{album.info["artist"]}"
+  puts "Listeners: #{album.info["listeners"]}"
+  puts "URL: #{album.info["url"]}"
+  puts "Release Date: #{album.info["releasedate"]}"
+  
+  puts
+  puts
+  
+  puts "Album Tags"
+  longest_tag_name = album.info["toptags"]["tag"].collect {|t| t["name"] }.sort {|x, y| y.length <=> x.length }.first.length
+  puts "=" * longest_tag_name
+  album.info["toptags"]["tag"].each { |t| puts t["name"] }
 	
 == Artists
 	
-	artist = Scrobbler2::Artist.new('Carrie Underwood')
-
-	puts 'Top Tracks'
-	puts "=" * 10
-	artist.top_tracks["track"].each { |t| puts "(#{t["playcount"]} plays) #{t["name"]}" }
-
-	puts
-
-	puts 'Similar Artists'
-	puts "=" * 15
-	artist.info["similar"]["artist"].each { |a| puts "#{a["name"]}" }
+  artist = Scrobbler2::Artist.new('Carrie Underwood')
+  
+  puts 'Top Tracks'
+  puts "=" * 10
+  artist.top_tracks["track"].each { |t| puts "(#{t["playcount"]} plays) #{t["name"]}" }
+  
+  puts
+  
+  puts 'Similar Artists'
+  puts "=" * 15
+  artist.info["similar"]["artist"].each { |a| puts "#{a["name"]}" }
 	
 == Tags	
 	
-	tag = Scrobbler2::Tag.new('country')
-
-	puts 'Top Albums'
-	tag.top_albums["album"].each { |a| puts "(#{a["tagcount"]} tags) '#{a["name"]}' by #{a["artist"]["name"]}" }
-
-	puts
-
-	puts 'Top Tracks'
-	tag.top_tracks.each { |t| puts "(#{t["tagcount"]} tags) '#{t["name"]}' by #{t["artist"]["name"]}" }
+  tag = Scrobbler2::Tag.new('country')
+  
+  puts 'Top Albums'
+  tag.top_albums["album"].each { |a| puts "(#{a["tagcount"]} tags) '#{a["name"]}' by #{a["artist"]["name"]}" }
+  
+  puts
+  
+  puts 'Top Tracks'
+  tag.top_tracks.each { |t| puts "(#{t["tagcount"]} tags) '#{t["name"]}' by #{t["artist"]["name"]}" }
 	
 == Tracks
 	
-	track = Scrobbler2::Track.new('Carrie Underwood', 'Before He Cheats')
-	puts 'Fans'
-	puts "=" * 4
-	puts track.info["listeners"]
+  track = Scrobbler2::Track.new('Carrie Underwood', 'Before He Cheats')
+  puts 'Fans'
+  puts "=" * 4
+  puts track.info["listeners"]
 
 = Development
 
@@ -152,4 +152,4 @@ Scrobbler2 api methods use a simple set of macros to implement the api.  All the
 * Write requests.
 * Submissions
 * Radio API
-	  
+ 
