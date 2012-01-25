@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'activesupport'
+require 'active_support/all'
 require 'httparty'
 $: << File.dirname(__FILE__)
 
