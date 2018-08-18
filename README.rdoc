@@ -31,9 +31,9 @@ Some requests (eg. write requests) require authentication.  Authenticated reques
 === Obtaining a session key
 
 scrobbler2 currently supports last.fm's desktop authentication protocol.  In this process
-1. The app requests a authentication token
+1. The app requests an authentication token
 2. The app sends the user to a last.fm authentication page
-3. The user agrees to allow the the app acess to their data.
+3. The user agrees to allow the app access to their data.
 4. The app requests a session key. 
 5. The app makes an authenticated request with the session key.
 
